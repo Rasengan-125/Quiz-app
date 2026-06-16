@@ -1,0 +1,9 @@
+- Student enters matric number
+- List of available quiz subject shows up
+- Student picks a quiz by number
+- The quiz is selected by using that number as an index of quizzes
+- "Are you ready" message pops up. Enter to continue
+- Timer starts
+- The questions show up one by with options, and input to put answer, and the answers are kept in an array
+- At the end, it compares each item in the answer array to the answer of the questions
+- It computes the percentage of the score and stores it in the scores.json
