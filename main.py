@@ -1,5 +1,5 @@
-from services.quiz_service import load_quizzes, save_quizzes, add_quiz
+from services.quiz_service import add_quiz, take_quiz
 
-quizes = load_quizzes()
+# add_quiz()
 
-add_quiz(quizes)
+take_quiz()

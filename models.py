@@ -38,3 +38,9 @@ class Quiz:
 
     def __str__(self):
         return f"{self.subject} — set by {self.teacher_name}"
+
+
+class Grade:
+    def __init__(self, matric, grades=None):
+        self.matric = matric
+        self.grades = grades if grades is not None else {}
