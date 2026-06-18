@@ -1,6 +1,8 @@
 import os
 import json
 from models import Grade
+from datetime import datetime
+from services.student_service import load_students, save_students
 
 
 def time_formatter(secs):
@@ -22,7 +24,8 @@ def marker(ans, correct):
 def load_grades():
     if os.path.exists("data/grades.json"):
         with open("data/grades.json", "r") as f:
-            return json.load(f)
+            grades = f.read()
+            return json.loads(grades) if grades else []
     else:
         return []
 
@@ -34,14 +37,35 @@ def save_score(data):
 
 def add_scores(matric, subject, score):
     grades = load_grades()
-    matric_nums = [g["matric"] for g in grades]
-    index = matric_nums.index(matric) if matric in matric_nums else -1
-
-    if index == -1:
-        y = Grade(matric, {subject: score})
-        grades.append(y.__dict__)
-    else:
-        x = grades[index]["grades"]
-        x[subject] = score
+    time = datetime.now().strftime("%d %B %Y, %I:%M %p")
+    grade = {"matric": matric, subject: score, "time": time}
+    grades.append(grade)
 
     save_score(grades)
+
+
+def check_students(matric):
+    students = load_students()
+    matrics = [student["matric"] for student in students]
+    if matric in matrics:
+        return True
+    else:
+        return False
+
+
+def update_score(matric, subject, score):
+    data = load_students()
+    students = [students["matric"] for students in data]
+    index = students.index(matric)
+    data[index]["scores"][subject] = score
+    save_students(data)
+
+
+def taken(subject, matric):
+    data = load_students()
+    matrics = [student["matric"] for student in data]
+    index = matrics.index(matric)
+    subjects = list(data[index]["scores"].keys())
+    if subject in subjects:
+        print("You have taken this quiz already")
+        return True

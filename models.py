@@ -1,7 +1,22 @@
+from datetime import datetime
+
+
 class Teacher:
-    def __init__(self, name, password):
+    def __init__(
+        self,
+        name,
+        email,
+        password,
+        status="Active",
+        hired=datetime.now().strftime("%d %B %Y, %I:%M %p"),
+        resign="",
+    ):
         self.name = name
+        self.email = email
         self.password = password
+        self.status = status
+        self.hired = hired
+        self.resign = resign
 
     def __str__(self):
         return f"{self.name}"
@@ -10,10 +25,11 @@ class Teacher:
 class Student:
     count = 0
 
-    def __init__(self, name, matric, scores=None):
+    def __init__(self, name, matric, scores=None, status="Active"):
         self.name = name
         self.matric = matric
         self.scores = scores if scores is not None else {}
+        self.status = status
 
     @classmethod
     def counts(cls):

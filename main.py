@@ -1,5 +1,19 @@
-from services.quiz_service import add_quiz, take_quiz
+from menus.admin import admin_menu
+from menus.student import student_menu
+from menus.teacher import teacher_menu
 
-# add_quiz()
 
-take_quiz()
+def start():
+    q1 = input("Are you a (T)eacher or (S)tudent? ").strip().upper()
+    if q1 == "T":
+        teacher_menu()
+    elif q1 == "S":
+        student_menu()
+    elif q1 == "ADMIN":
+        admin_menu()
+    else:
+        print("Invalid input")
+        return
+
+
+start()

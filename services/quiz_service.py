@@ -2,67 +2,100 @@ import os
 import json
 import time
 from models import Quiz
-from services.helpers import time_formatter, marker, add_scores
+from services.helpers import (
+    time_formatter,
+    marker,
+    add_scores,
+    check_students,
+    update_score,
+    taken,
+)
 
 
 def load_quizzes():
     if os.path.exists("data/quizzes.json"):
         with open("data/quizzes.json", "r") as f:
-            return json.load(f)
+            content = f.read()
+            return json.loads(content) if content else []
     else:
         return []
 
 
-def save_quizzes():
-    quizes = load_quizzes()
+def save_quizzes(quizzes):
     with open("data/quizzes.json", "w") as f:
-        json.dump(quizes, f, indent=4)
+        json.dump(quizzes, f, indent=4)
 
 
+# -----------------------ADD QUIZ---------------------------
 def add_quiz():
     data = load_quizzes()
-    i = 1
     letters = ["A", "B", "C", "D"]
-    subject = input("Subject: ").strip()
-    teacher = input("Teacher: ").strip()
-    time = int(input("How long should the test last in seconds: "))
-    questions = []
-    num = int(input("How many questions are you setting? "))
 
-    while i <= num:
+    subject = input("Subject: ").strip().upper()
+    subs = [quiz["subject"] for quiz in data]
+
+    # ----------------IF BLOCK----------------
+    if subject in subs:
+        q1 = input("Subject exists.\n R = Replace | Q = Quit\n... ").strip().lower()
+        if q1 == "q":
+            return
+        elif q1 != "r":
+            print(f"{q1} is not a valid option")
+            return
+        index = subs.index(subject)
+    #  ---------------------------------INPUTS--------------------------------------
+    teacher = input("Teacher: ").strip().capitalize()
+    time = int(input("Time in seconds: "))
+    num = int(input("Number of questions: "))
+
+    questions = []
+    for i in range(1, num + 1):
         print("_______________________________________")
         question = input(f"Question {i}\n")
         options = []
-        op = 1
-        i += 1
-        while op <= 4:
-            option = input(f"Option {letters[op-1]}: ").strip().capitalize()
-            options.append(f"{letters[op-1]}. {option}")
-            op += 1
-        answer = input("Answer: ").strip().capitalize()
+        for j in range(4):
+            option = input(f"Option {letters[j]}: ").strip().capitalize()
+            options.append(f"{letters[j]}. {option}")
+        answer = input("Answer: ").strip().upper()
         questions.append({"question": question, "options": options, "answer": answer})
 
-    quiz = Quiz(subject, teacher, time, questions)
-    data.append(quiz.__dict__)
-    save_quizzes()
+    quiz = Quiz(subject, teacher, time, questions).__dict__
+
+    if subject in subs:
+        data[index] = quiz
+    else:
+        data.append(quiz)
+
+    save_quizzes(data)
 
 
+# ------------------- TAKE QUIZZ------------------------------------
 def take_quiz():
     data = load_quizzes()
-    matric = input("Enter matric number: ")
+    matric = input("Enter matric number: ").strip()
+
+    student = check_students(matric)
+    if student == False:
+        print("Matric number not found. You are not a registered student")
+        return
+
     for n, item in enumerate(data, start=1):
         subject = item["subject"]
-        print(f"{n}. {subject}\n")  # Quiz list
+        print(f"{n}. {subject}")  # Quiz list
 
     course = (
         int(input("Select the course you want to take by number: ")) - 1
     )  # Quiz selection
 
-    if course < 0 or course > len(data):
+    if course >= len(data):
         return "Fuck you"
 
     quiz = data[course]
     sub = quiz["subject"]
+
+    if taken(sub, matric):
+        return  # ----------------------Taken or Not
+
     input("Are you ready? (Enter to continue)")
     q_time = int(quiz["time"])
     time_formatter(q_time)
@@ -87,5 +120,8 @@ def take_quiz():
     quiz_answers = [q["answer"] for q in quiz["questions"]]
     score = marker(answers, quiz_answers)
 
-    # Update JSON
+    # Update grades.JSON
     add_scores(matric, sub, score)
+
+    # Update student.json
+    update_score(matric, sub, score)

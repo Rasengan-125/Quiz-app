@@ -1,0 +1,10 @@
+[
+  {
+    "name": "David",
+    "email": "david@gmail.com",
+    "password": "david123",
+    "status": "Inactive",
+    "hired": "17 June 2026, 10:33 PM",
+    "resign": "17 June 2026, 10:34 PM"
+  }
+]

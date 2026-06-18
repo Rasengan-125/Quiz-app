@@ -2,25 +2,52 @@
     {
         "subject": "FEY204",
         "teacher_name": "Feyi",
-        "time": 60,
+        "time": 78,
         "questions": [
             {
-                "question": "My name is",
+                "question": "I am ai",
                 "options": [
-                    "A. Feyi",
-                    "B. Fayi",
-                    "C. Fii",
-                    "D. Daick"
+                    "A. T",
+                    "B. F",
+                    "C. A",
+                    "D. Z"
+                ],
+                "answer": "B"
+            },
+            {
+                "question": "fuck me",
+                "options": [
+                    "A. No",
+                    "B. Yes",
+                    "C. Omo",
+                    "D. Stfu"
+                ],
+                "answer": "B"
+            }
+        ]
+    },
+    {
+        "subject": "DAV204",
+        "teacher_name": "David",
+        "time": 79,
+        "questions": [
+            {
+                "question": "wertyui",
+                "options": [
+                    "A. Sda",
+                    "B. Hgfd",
+                    "C. Gfd",
+                    "D. Ytr"
                 ],
                 "answer": "A"
             },
             {
-                "question": "I like ",
+                "question": "uytretrew",
                 "options": [
-                    "A. Boob",
-                    "B. Cake",
-                    "C. Shoe",
-                    "D. Cick"
+                    "A. Sfks",
+                    "B. Sdfjklv",
+                    "C. Sg",
+                    "D. Vsd"
                 ],
                 "answer": "B"
             }
