@@ -46,7 +46,7 @@ def add_scores(matric, subject, score):
 
 def check_students(matric):
     students = load_students()
-    matrics = [student["matric"] for student in students]
+    matrics = [s["matric"] for s in students]
     if matric in matrics:
         return True
     else:
@@ -55,17 +55,29 @@ def check_students(matric):
 
 def update_score(matric, subject, score):
     data = load_students()
-    students = [students["matric"] for students in data]
+    students = [s["matric"] for s in data]
     index = students.index(matric)
+    avg = (sum(data[index]["scores"].values()) + score) / (
+        len(data[index]["scores"]) + 1
+    )
     data[index]["scores"][subject] = score
+    data[index]["average"] = avg
     save_students(data)
 
 
 def taken(subject, matric):
     data = load_students()
-    matrics = [student["matric"] for student in data]
+    matrics = [s["matric"] for s in data]
     index = matrics.index(matric)
     subjects = list(data[index]["scores"].keys())
     if subject in subjects:
         print("You have taken this quiz already")
         return True
+
+
+def admin_auth():
+    allowed = False
+    password = input("Enter password: ")
+    if password == "adminpassword123":
+        allowed = True
+    return allowed

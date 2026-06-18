@@ -88,3 +88,5 @@ Each question:
 ---
 
 ## Password Strategy
+
+Passwords are stored as plain text during development for simplicity. Before deployment, all passwords will be hashed using `bcrypt` — each password will be salted and hashed on registration, and verified using `bcrypt.checkpw()` on login. No plain text passwords will exist in production.

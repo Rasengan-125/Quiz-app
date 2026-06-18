@@ -6,7 +6,8 @@ from models import Student
 def load_students():
     if os.path.exists("data/students.json"):
         with open("data/students.json", "r") as f:
-            return json.load(f)
+            content = f.read()
+            return json.loads(content) if content else []
     else:
         return []
 
@@ -18,8 +19,8 @@ def save_students(data):
 
 def add_student():
     students = load_students()
-    matrics = [student["matric"] for student in students]
-    name = input("Students Name: ").strip()
+    matrics = [s["matric"] for s in students]
+    name = input("Students Name: ").strip().capitalize()
     matric = input("Students Matric: ").strip()
 
     if matric in matrics:
@@ -29,13 +30,13 @@ def add_student():
     student = Student(name, matric)
     students.append(student.__dict__)
     save_students(students)
-    print("Added successfully!!")
+    print(f"\nSTUDENT ADDED SUCCESSFULLY!!")
 
 
 def delete_student():
     matric = input("Matric: ").strip()
     students = load_students()
-    matrics = [student["matric"] for student in students]
+    matrics = [s["matric"] for s in students]
     if matric not in matrics:
         print("Student not found")
         return
@@ -45,13 +46,16 @@ def delete_student():
 
 
 def show_students():
-    students = load_students()
+    data = load_students()
+    students = sorted(data, key=lambda x: x.get("average") or 0, reverse=True)
+
     for n, s in enumerate(students, start=1):
         print(f"""
 {n}. {s['name']}
     Matric  : {s['matric']}
     Status  : {s.get('status', 'Active')}
-    Scores  : {s['scores']}
+    Scores  : {s['scores']},
+    Average : {s.get("average", 0)}
 """)
 
 
@@ -68,5 +72,6 @@ def find_student():
 {student['name']}
     Matric  : {student['matric']}
     Status  : {student.get('status', 'Active')}
-    Scores  : {student['scores']}
+    Scores  : {student['scores']},
+    Average : {student['average']}
 """)

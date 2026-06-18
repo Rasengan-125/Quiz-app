@@ -1,6 +1,6 @@
 from services.quiz_service import add_quiz
-from services.student_service import add_student, show_students, find_student
-from services.teacher_service import add_teacher, teacher_auth
+from services.student_service import show_students, find_student
+from services.teacher_service import teacher_auth
 
 
 def teacher_menu():
@@ -12,22 +12,25 @@ def teacher_menu():
     else:
         print("Access denied")
         return
+    while True:
+        options = {
+            "1": add_quiz,
+            "2": show_students,
+            "3": find_student,
+        }
+        print("")
 
-    options = {
-        "1": add_quiz,
-        "2": show_students,
-        "3": find_student,
-    }
+        for n, option in enumerate(
+            ["Create Quiz", "Show Students", "Find Student"], start=1
+        ):
+            print(f"{n}. {option}")
+        choice = input("\nSelect an option (Q to quit): ").strip().upper()
+        print("")
+        if choice == "Q":
+            break
+        action = options.get(choice)
 
-    for n, option in enumerate(
-        ["Create Quiz", "Show Students", "Find Student"], start=1
-    ):
-        print(f"{n}. {option}")
-
-    choice = input("Select: ").strip()
-    action = options.get(choice)
-
-    if action:
-        action()
-    else:
-        print("Invalid option")
+        if action:
+            action()
+        else:
+            print("Invalid option")

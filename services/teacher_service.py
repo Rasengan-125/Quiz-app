@@ -20,7 +20,7 @@ def save_teachers(teachers):
 
 def add_teacher():
     teachers = load_teachers()
-    name = input("Name: ").strip()
+    name = input("Name: ").strip().capitalize()
     email = input("Email: ").strip()
     password = input("Password: ").strip()
     emails = [teacher["email"] for teacher in teachers]
@@ -41,6 +41,7 @@ def add_teacher():
 
     teachers.append(Teacher(name, email, password).__dict__)
     save_teachers(teachers)
+    print(f"\n{name} ADDED SUCCESSFULLY")
 
 
 def delete_teacher():
@@ -51,9 +52,11 @@ def delete_teacher():
         print("Teacher not found")
         return
     index = emails.index(email)
+    name = teachers[index]["name"]
     teachers[index]["status"] = "Inactive"
     teachers[index]["resign"] = datetime.now().strftime("%d %B %Y, %I:%M %p")
     save_teachers(teachers)
+    print(f"\n{name} DELETED SUCCESSFULLY")
 
 
 def show_teachers():
@@ -98,7 +101,9 @@ def teacher_auth():
     index = emails.index(email)
     if data[index]["password"] == password:
         validate = True
-        print(f"Welcome {data[index]["name"]}")
+        print("")
+        print(f"-----------Welcome {data[index]["name"]}-----------")
     else:
-        print("Wrong password")
+        print("")
+        print("WRONG PASSWORD")
     return validate

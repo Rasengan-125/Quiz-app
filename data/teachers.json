@@ -1,10 +1,18 @@
 [
   {
-    "name": "David",
-    "email": "david@gmail.com",
-    "password": "david123",
+    "name": "David Adeyemi",
+    "email": "d.adeyemi@university.edu.ng",
+    "password": "David@2026",
     "status": "Inactive",
-    "hired": "17 June 2026, 10:33 PM",
-    "resign": "17 June 2026, 10:34 PM"
+    "hired": "01 January 2026, 08:00 AM",
+    "resign": "17 June 2026, 05:00 PM"
+  },
+  {
+    "name": "Charles Okonkwo",
+    "email": "c.okonkwo@university.edu.ng",
+    "password": "Charles@2026",
+    "status": "Active",
+    "hired": "15 March 2026, 09:00 AM",
+    "resign": ""
   }
 ]

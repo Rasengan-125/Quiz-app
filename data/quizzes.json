@@ -1,56 +1,41 @@
 [
-    {
-        "subject": "FEY204",
-        "teacher_name": "Feyi",
-        "time": 78,
-        "questions": [
-            {
-                "question": "I am ai",
-                "options": [
-                    "A. T",
-                    "B. F",
-                    "C. A",
-                    "D. Z"
-                ],
-                "answer": "B"
-            },
-            {
-                "question": "fuck me",
-                "options": [
-                    "A. No",
-                    "B. Yes",
-                    "C. Omo",
-                    "D. Stfu"
-                ],
-                "answer": "B"
-            }
-        ]
-    },
-    {
-        "subject": "DAV204",
-        "teacher_name": "David",
-        "time": 79,
-        "questions": [
-            {
-                "question": "wertyui",
-                "options": [
-                    "A. Sda",
-                    "B. Hgfd",
-                    "C. Gfd",
-                    "D. Ytr"
-                ],
-                "answer": "A"
-            },
-            {
-                "question": "uytretrew",
-                "options": [
-                    "A. Sfks",
-                    "B. Sdfjklv",
-                    "C. Sg",
-                    "D. Vsd"
-                ],
-                "answer": "B"
-            }
-        ]
-    }
+  {
+    "subject": "MTH202",
+    "teacher_name": "Dr. Charles Okonkwo",
+    "time": 300,
+    "questions": [
+      {
+        "question": "What is the derivative of x²?",
+        "options": ["A. 2x", "B. x", "C. 2", "D. x²"],
+        "answer": "A"
+      },
+      {
+        "question": "What is the integral of 2x?",
+        "options": ["A. 2", "B. x²", "C. 2x²", "D. x"],
+        "answer": "B"
+      }
+    ]
+  },
+  {
+    "subject": "PHY204",
+    "teacher_name": "David Adeyemi",
+    "time": 300,
+    "questions": [
+      {
+        "question": "What is the unit of force?",
+        "options": ["A. Joule", "B. Newton", "C. Watt", "D. Pascal"],
+        "answer": "B"
+      },
+      {
+        "question": "What is the speed of light?",
+        "options": [
+          "A. 3×10⁸ m/s",
+          "B. 3×10⁶ m/s",
+          "C. 3×10¹⁰ m/s",
+          "D. 3×10⁴ m/s"
+        ],
+        "answer": "A"
+      }
+    ]
+  }
 ]

@@ -45,8 +45,19 @@ def add_quiz():
         index = subs.index(subject)
     #  ---------------------------------INPUTS--------------------------------------
     teacher = input("Teacher: ").strip().capitalize()
-    time = int(input("Time in seconds: "))
-    num = int(input("Number of questions: "))
+    while True:
+        try:
+            quiz_time = int(input("Time in seconds: "))
+            break
+        except ValueError:
+            print("Please enter a valid number")
+
+    while True:
+        try:
+            num = int(input("Number of questions: "))
+            break
+        except ValueError:
+            print("Please enter a valid number")
 
     questions = []
     for i in range(1, num + 1):
@@ -59,7 +70,7 @@ def add_quiz():
         answer = input("Answer: ").strip().upper()
         questions.append({"question": question, "options": options, "answer": answer})
 
-    quiz = Quiz(subject, teacher, time, questions).__dict__
+    quiz = Quiz(subject, teacher, quiz_time, questions).__dict__
 
     if subject in subs:
         data[index] = quiz
@@ -67,6 +78,7 @@ def add_quiz():
         data.append(quiz)
 
     save_quizzes(data)
+    print("\nQUIZ CREATED")
 
 
 # ------------------- TAKE QUIZZ------------------------------------
@@ -83,14 +95,17 @@ def take_quiz():
         subject = item["subject"]
         print(f"{n}. {subject}")  # Quiz list
 
-    course = (
-        int(input("Select the course you want to take by number: ")) - 1
-    )  # Quiz selection
+    while True:
+        try:
+            course = int(input("Select the course you want to take by number: "))
+            if course < 1 or course > len(data):
+                print("Invalid quiz number")
+                continue
+            break
+        except ValueError:
+            print("Please enter a valid number")
 
-    if course >= len(data):
-        return "Fuck you"
-
-    quiz = data[course]
+    quiz = data[course - 1]
     sub = quiz["subject"]
 
     if taken(sub, matric):
@@ -125,3 +140,6 @@ def take_quiz():
 
     # Update student.json
     update_score(matric, sub, score)
+
+    print("\nQuiz Finished")
+    print(f"SCORE: {score}")

@@ -2,21 +2,24 @@
     {
         "name": "David",
         "matric": "240813040",
-        "scores": {
-            "FEY204": 50.0,
-            "DAV204": 50.0
-        },
-        "status": "Inactive"
+        "scores": {},
+        "average": null,
+        "status": "Active"
     },
     {
         "name": "Charles",
         "matric": "240813005",
-        "scores": {}
+        "scores": {},
+        "average": null,
+        "status": "Active"
     },
     {
         "name": "Feyi",
         "matric": "240813400",
-        "scores": {},
-        "status": "Inactive"
+        "scores": {
+            "FEY204": 50.0
+        },
+        "average": 50.0,
+        "status": "Active"
     }
 ]
