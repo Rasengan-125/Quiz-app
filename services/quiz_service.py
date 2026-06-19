@@ -14,7 +14,7 @@ from services.helpers import (
 
 def load_quizzes():
     if os.path.exists("data/quizzes.json"):
-        with open("data/quizzes.json", "r") as f:
+        with open("data/quizzes.json", "r", encoding="utf-8") as f:
             content = f.read()
             return json.loads(content) if content else []
     else:
@@ -67,7 +67,11 @@ def add_quiz():
         for j in range(4):
             option = input(f"Option {letters[j]}: ").strip().capitalize()
             options.append(f"{letters[j]}. {option}")
-        answer = input("Answer: ").strip().upper()
+        while True:
+            answer = input("Answer: ").strip().upper()
+            if answer in ["A", "B", "C", "D"]:
+                break
+            print("Please enter A, B, C or D")
         questions.append({"question": question, "options": options, "answer": answer})
 
     quiz = Quiz(subject, teacher, quiz_time, questions).__dict__
@@ -84,12 +88,14 @@ def add_quiz():
 # ------------------- TAKE QUIZZ------------------------------------
 def take_quiz():
     data = load_quizzes()
-    matric = input("Enter matric number: ").strip()
+    while True:
+        matric = input("Enter matric number: ").strip()
 
-    student = check_students(matric)
-    if student == False:
-        print("Matric number not found. You are not a registered student")
-        return
+        student = check_students(matric)
+        if student == False:
+            print("Matric number not found. You are not a registered student")
+        else:
+            break
 
     for n, item in enumerate(data, start=1):
         subject = item["subject"]

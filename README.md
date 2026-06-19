@@ -85,11 +85,12 @@ Each question:
 
 ## Data Files
 
-| File            | Format | Contains                                     |
-| --------------- | ------ | -------------------------------------------- |
-| `teachers.json` | JSON   | Teacher name, email, password, status        |
-| `quizzes.json`  | JSON   | Quiz subject, teacher, questions and answers |
-| `students.json` | JSON   | Student name, matric, scores, average        |
+| File            | Format | Contains                                                        |
+| --------------- | ------ | --------------------------------------------------------------- |
+| `teachers.json` | JSON   | Teacher name, email, password, status                           |
+| `quizzes.json`  | JSON   | Quiz subject, teacher, questions and answers                    |
+| `students.json` | JSON   | Student name, matric, scores, average                           |
+| `grades.json`   | JSON   | History log of every quiz attempt (not used as source of truth) |
 
 ---
 
@@ -150,3 +151,9 @@ python main.py
 ```
 
 Always run from the project root, never from inside a subfolder.
+
+## Known Limitations
+
+- The timer is checked between questions, not during input — a student
+  who pauses mid-question and answers after time technically expires
+  will still have that answer counted.

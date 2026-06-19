@@ -17,7 +17,6 @@ def start():
             break
         else:
             print("Invalid input")
-            return
 
 
 start()

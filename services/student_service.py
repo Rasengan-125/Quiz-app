@@ -5,7 +5,7 @@ from models import Student
 
 def load_students():
     if os.path.exists("data/students.json"):
-        with open("data/students.json", "r") as f:
+        with open("data/students.json", "r", encoding="utf-8") as f:
             content = f.read()
             return json.loads(content) if content else []
     else:
@@ -41,8 +41,19 @@ def delete_student():
         print("Student not found")
         return
     index = matrics.index(matric)
+
+    confirm = (
+        input(f"Are you sure you want to deactivate {students[index]['name']}? (Y/N): ")
+        .strip()
+        .upper()
+    )
+    if confirm != "Y":
+        print("Cancelled")
+        return
+
     students[index]["status"] = "Inactive"
     save_students(students)
+    print("Student deactivated")
 
 
 def show_students():
@@ -75,3 +86,25 @@ def find_student():
     Scores  : {student['scores']},
     Average : {student['average']}
 """)
+
+
+def view_my_grades():
+    data = load_students()
+    while True:
+        matric = input("Enter your matric number: ").strip()
+        matrics = [s["matric"] for s in data]
+        if matric not in matrics:
+            print("Student not found")
+        else:
+            break
+    index = matrics.index(matric)
+    student = data[index]
+    print(f"\nName    : {student['name']}")
+    print(f"Matric  : {student['matric']}")
+    print(f"Average : {student['average'] or 'No scores yet'}")
+    print("\nScores:")
+    if student["scores"]:
+        for subject, score in student["scores"].items():
+            print(f"  {subject} : {score}")
+    else:
+        print("  No scores yet")
