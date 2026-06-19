@@ -22,7 +22,7 @@ def marker(ans, correct):
 
 def load_grades():
     if os.path.exists("data/grades.json"):
-        with open("data/grades.json", "r") as f:
+        with open("data/grades.json", "r", encoding="utf-8") as f:
             grades = f.read()
             return json.loads(grades) if grades else []
     else:
@@ -30,7 +30,7 @@ def load_grades():
 
 
 def save_score(data):
-    with open("data/grades.json", "w") as f:
+    with open("data/grades.json", "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
 
 

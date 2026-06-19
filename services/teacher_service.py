@@ -15,7 +15,7 @@ def load_teachers():
 
 
 def save_teachers(teachers):
-    with open("data/teachers.json", "w") as f:
+    with open("data/teachers.json", "w", encoding="utf-8") as f:
         json.dump(teachers, f, indent=4)
 
 

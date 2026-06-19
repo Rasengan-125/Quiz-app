@@ -13,7 +13,7 @@ def load_students():
 
 
 def save_students(data):
-    with open("data/students.json", "w") as f:
+    with open("data/students.json", "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
 
@@ -84,7 +84,7 @@ def find_student():
     Matric  : {student['matric']}
     Status  : {student.get('status', 'Active')}
     Scores  : {student['scores']},
-    Average : {student['average']}
+    Average : {student.get("average", 0)}
 """)
 
 

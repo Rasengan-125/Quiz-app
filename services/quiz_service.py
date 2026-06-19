@@ -22,7 +22,7 @@ def load_quizzes():
 
 
 def save_quizzes(quizzes):
-    with open("data/quizzes.json", "w") as f:
+    with open("data/quizzes.json", "w", encoding="utf-8") as f:
         json.dump(quizzes, f, indent=4)
 
 

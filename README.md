@@ -134,6 +134,12 @@ Passwords are stored as plain text during development for simplicity. Before dep
 
 ---
 
+## Known Limitations
+
+`data/` is intentionally tracked in version control for this project. Since this is a learning exercise rather than a production system, keeping the JSON files visible in git makes it easier to inspect state, debug issues, and review data changes alongside code changes. This is a deliberate tradeoff, not an oversight — it will not carry over into any project intended for real deployment.
+
+---
+
 ## Requirements
 
 ```bash
@@ -151,9 +157,3 @@ python main.py
 ```
 
 Always run from the project root, never from inside a subfolder.
-
-## Known Limitations
-
-- The timer is checked between questions, not during input — a student
-  who pauses mid-question and answers after time technically expires
-  will still have that answer counted.
