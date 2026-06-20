@@ -106,12 +106,12 @@ def teacher_auth():
     emails = [teachers["email"] for teachers in data]
     if email not in emails:
         print("Teacher not found")
-        return
+        return False, None
     index = emails.index(email)
     if data[index]["password"] == password:
         validate = True
         print("")
-        print(f"-----------Welcome {data[index]["name"]}-----------")
+        print(f"-----------Welcome {data[index]['name']}-----------")
     else:
         print("")
         print("WRONG PASSWORD")
